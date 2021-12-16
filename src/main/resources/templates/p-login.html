@@ -1,16 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>LOJA FLASH</title>
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<title>LOJA</title>
 </head>
 <body>
-	<h1>Páina de Login</h1>
-	<div class="container">
-		<p>Email: <input type="text"></input></p>
-		<p>Senha: <input type="text"></input></p>
-		
-		<p>Não tem conta? <button type="submit">Cadastre-se</button></p>
+	<div th:replace="~{menu :: menu}" class="container">
+		<h1>Página de Login</h1>
+		<form action="/eventos" method="post">
+
+			<div>
+				<label>Email:</label><input type="text" name="email">
+			</div>
+			<div>
+				<label>Senha:</label><input type="text" name="senha">
+			</div>
+			<div>
+				<button class="waves-effect waves-light btn" type="submit">Salvar</button>
+				<button class="waves-effect waves-light btn" type="reset">Limpar</button>
+				<button class="waves-effect waves-light btn" type="submit">Cadastre-se</button>
+			</div>
+		</form>
 	</div>
 </body>
 </html>
