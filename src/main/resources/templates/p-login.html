@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
 <meta charset="UTF-8">
-<!-- Compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
 <title>LOJA</title>
 </head>
 <body>
-	<div th:replace="~{menu :: menu}" class="container">
+	
 		<h1>Página de Login</h1>
-		<form action="/eventos" method="post">
+		<form action="" method="post">
 
 			<div>
 				<label>Email:</label><input type="text" name="email">
@@ -20,11 +17,9 @@
 				<label>Senha:</label><input type="text" name="senha">
 			</div>
 			<div>
-				<button class="waves-effect waves-light btn" type="submit">Salvar</button>
-				<button class="waves-effect waves-light btn" type="reset">Limpar</button>
-				<button class="waves-effect waves-light btn" type="submit">Cadastre-se</button>
+				<button type="reset">Limpar</button>
+				<button><a href="/cadastro">Cadastre-se</a></button>
 			</div>
 		</form>
-	</div>
 </body>
 </html>
