@@ -12,15 +12,15 @@ import projeto.pi.loja.repositorios.ClienteRepositorio;
 public class LojaController {
 	@Autowired
 	private ClienteRepositorio cr;
-
+	
 	@RequestMapping("/cadastro")
 	public String login() {
 		return "p-cadastro-cliente";
 	}
-	@PostMapping("/loja")
+	@PostMapping("/")
 	public String cadastrar(Cliente cliente) {
 		System.out.println(cliente);
 		cr.save(cliente);
-		return "cliente-cadastrado";
+		return "index";
 	}
 }
