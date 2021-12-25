@@ -6,4 +6,5 @@ import projeto.pi.loja.models.Cliente;
 
 public interface ClienteRepositorio extends JpaRepository<Cliente, Long>{
 
+	Cliente findByEmail(String email);
 }
