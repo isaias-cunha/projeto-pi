@@ -1,112 +1,126 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
 <title>Loja Teste</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
 
-<header class="header">
+	<header class="header">
 
-    <a href="#" class="logo">
-        <img src="imagens/icone.png" alt="">
-    </a>
+		<a href="#" class="logo"> <img src="imagens/icone.png" alt="">
+		</a>
 
-    <nav class="navbar">
-        <a href="#home">Inicio</a>
-        <a href="#sobre">Sobre nós</a>
-        <a href="#produtos">Nossos Produtos</a>
-        <a href="/cadastro">Cadastrar</a>
-        <a href="/login">Logar</a>
-    </nav>
+		<nav class="navbar">
+			<a href="#home">Inicio</a> <a href="#sobre">Sobre nós</a> <a
+				href="#produtos">Nossos Produtos</a>
+		</nav>
 
-    <div class="icones">
-        <div class="fas fa-shopping-cart" id="cart-btn"></div>
-        <div class="fas fa-bars" id="menu-btn"></div>
-    </div>
-   
-</header>
+		<div class="icones">
+			<div class="fas fa-user" onclick="usuarioToggle();">
+				<div class="usuario-menu">
+					<div sec:authorize="!isAuthenticated()">
+						<a href="/cadastro">Cadastre-se</a>
+						<a href="/login">Entrar</a>
+					</div>
+					<div sec:authorize="isAuthenticated()">
+						<h3>
+							Olá <span sec:authorize="name"></span>
+						</h3>
+						<ul>
+							<li><a href="/pedidos/clientes">Meus pedidos</a></li>
+							<li><a href="/logout">Sair</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="fas fa-shopping-cart"></div>
+			<div class="fas fa-bars"></div>
+		</div>
 
-<section class="home" id="home">
+	</header>
 
-    <div class="content">
-        <h3>Titulo</h3>
-        <p>Paragrafo</p>
-    </div>
+	<section class="home" id="home">
 
-</section>
-<section class="sobre" id="sobre">
+		<div class="content">
+			<h3>Titulo</h3>
+			<p>Paragrafo</p>
+		</div>
 
-    <h1 class="heading">Sobre Nós</h1>
+	</section>
+	<section class="sobre" id="sobre">
 
-    <div class="row">
+		<h1 class="heading">Sobre Nós</h1>
 
-        <div class="imagem">
-            <img src="imagens/sobre.jpg" alt="">
-        </div>
+		<div class="row">
 
-        <div class="content">
-            <h3>Titulo</h3>
-            <p>paragrafo</p>
-        </div>
-    </div>
-</section>
+			<div class="imagem">
+				<img src="imagens/sobre.jpg" alt="">
+			</div>
 
-<section class="produtos" id="produtos">
+			<div class="content">
+				<h3>Titulo</h3>
+				<p>paragrafo</p>
+			</div>
+		</div>
+	</section>
 
-    <h1 class="heading"> Nossos Produtos</h1>
+	<section class="produtos" id="produtos">
 
-    <div class="box-container">
+		<h1 class="heading">Nossos Produtos</h1>
 
-        <div class="box">
-            <div class="imagem">
-                <img src="imagens/produto-1.png" alt="">
-            </div>
-            <div class="content">
-                <h3>Blusa</h3>
-                 <p>R$20</p>
-            </div>
-        </div>
+		<div class="box-container">
 
-        <div class="box">
-            <div class="imagem">
-                <img src="imagens/produto-2.png" alt="">
-            </div>
-            <div class="content">
-                <h3>Calça</h3>
-                <p>R$20</p>
-           </div>
-        </div>
+			<div class="box">
+				<div class="imagem">
+					<img src="imagens/produto-1.png" alt="">
+				</div>
+				<div class="content">
+					<h3>Blusa</h3>
+					<p>R$20</p>
+				</div>
+			</div>
 
-        <div class="box">
-            <div class="imagem">
-                <img src="imagens/produto-3.png" alt="">
-            </div>
-            <div class="content">
-                <h3>Sapatos</h3>
-              <p>R$20</p>
-            </div>
-        </div>
+			<div class="box">
+				<div class="imagem">
+					<img src="imagens/produto-2.png" alt="">
+				</div>
+				<div class="content">
+					<h3>Calça</h3>
+					<p>R$20</p>
+				</div>
+			</div>
 
-    </div>
+			<div class="box">
+				<div class="imagem">
+					<img src="imagens/produto-3.png" alt="">
+				</div>
+				<div class="content">
+					<h3>Sapatos</h3>
+					<p>R$20</p>
+				</div>
+			</div>
 
-</section>
+		</div>
 
-<section class="footer">
+	</section>
 
-    <div class="links">
-        <a href="#home">Inicio</a>
-        <a href="#sobre">Sobre</a>
-        <a href="#produtos">Nossos products</a>
-    </div>
+	<section class="footer">
 
-</section>
+		<div class="links">
+			<a href="#home">Inicio</a> <a href="#sobre">Sobre</a> <a
+				href="#produtos">Nossos products</a>
+		</div>
 
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
+	</section>
+
+	<!-- custom js file link  -->
+	<script src="js/script.js"></script>
 
 </body>
 </html>

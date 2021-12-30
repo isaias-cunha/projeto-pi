@@ -1,6 +1,7 @@
 package projeto.pi.loja.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,9 +32,13 @@ public class ExemploController {
 	public String cadastro() {
 		return "p-cadastro-cliente";
 	}
-	@PostMapping("/salvar/cliente")
+	@PostMapping("/salvar_cliente")
 	public String cadastrar(Usuario user) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String password = encoder.encode(user.getSenha());
+		user.setSenha(password);
 		ur.save(user);
-		return "index";
+		
+		return "redirect:/";
 	}
 }
