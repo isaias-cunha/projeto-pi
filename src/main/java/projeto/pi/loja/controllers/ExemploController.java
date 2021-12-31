@@ -1,11 +1,14 @@
 package projeto.pi.loja.controllers;
 
+
+import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import projeto.pi.loja.models.Papel;
 import projeto.pi.loja.models.Usuario;
 import projeto.pi.loja.repositories.UsuarioRepository;
 

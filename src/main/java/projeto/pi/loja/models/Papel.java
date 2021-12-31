@@ -13,27 +13,31 @@ public class Papel implements GrantedAuthority {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String nome;
+	private String papel;
 
+	public Papel(String papel) {
+		this.papel = papel;
+	}
+	
 	public Long getId() {
 		return id;
 	}
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getRole() {
+		return papel;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setRole(String papel) {
+		this.papel = papel;
 	}
 
 	@Override
 	public String getAuthority() {
-		return this.nome;
+		return this.papel;
 	}
 
 }
