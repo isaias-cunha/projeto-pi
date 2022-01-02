@@ -3,18 +3,23 @@ package projeto.pi.loja.models;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import projeto.pi.loja.models.Papel;
+
 @Entity
+@Table(name =  "usuario")
 public class Usuario implements UserDetails {
 
 	@Id
@@ -22,9 +27,24 @@ public class Usuario implements UserDetails {
 	private Long id;
 	private String email, senha, telefone, endereco, nome;
 	
-	@ManyToMany
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Papel> papeis;
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "usuario_papel",joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"),inverseJoinColumns = @JoinColumn(name = "papel_id", referencedColumnName = "id"))
+	private Collection<Papel> roles;
+
+	public Usuario(String email, String senha, String telefone, String endereco, String nome,
+			Collection<Papel> roles) {
+		super();
+		this.email = email;
+		this.senha = senha;
+		this.telefone = telefone;
+		this.endereco = endereco;
+		this.nome = nome;
+		this.roles = roles;
+	}
+
+	public Usuario(String email2, String password, Collection<? extends GrantedAuthority> mapRolesToAuthorities) {
+
+	}
 
 	public Long getId() {
 		return id;
@@ -72,12 +92,17 @@ public class Usuario implements UserDetails {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	public Collection<Papel> getRoles() {
+		return roles;
+	}
+	
+	public void setRoles(Collection<Papel> roles) {
+		this.roles = roles;
+	}
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return this.papeis;
+		return this.roles;
 	}
-
 	@Override
 	public String getPassword() {
 		return this.senha;
@@ -87,6 +112,7 @@ public class Usuario implements UserDetails {
 	public String getUsername() {
 		return this.email;
 	}
+	
 
 	@Override
 	public boolean isAccountNonExpired() {
