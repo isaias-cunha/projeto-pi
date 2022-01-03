@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container">
+<h1>Lista</h1>
+<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>Marca</th>
+				<th>Preço</th>
+				<th>Quantidade</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="p :${produtos}">
+				<td th:text="${p.id}">1</td>
+				<td th:text="${p.nome}">1</td>
+				<td th:text="${p.marca}">1</td>
+				<td th:text="${p.preco}">1</td>
+				<td th:text="${p.qtd}">1</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+</body>
+</html>
