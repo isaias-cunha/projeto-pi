@@ -38,7 +38,9 @@ public class ExemploController {
 	public String cadastrar(Usuario user) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String password = encoder.encode(user.getSenha());
+		user.setRoles(Arrays.asList(new Papel("ROLE_CLIENTE")));
 		user.setSenha(password);
+		
 		ur.save(user);
 		
 		return "redirect:/";
