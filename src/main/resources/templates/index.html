@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Loja Teste</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+	<header class="header">
+
+		<a href="#" class="logo"> <img src="imagens/icone.png" alt="">
+		</a>
+
+		<nav class="navbar">
+			<a href="#home">Inicio</a> <a href="#sobre">Sobre nós</a> <a
+				href="#produtos">Nossos Produtos</a>
+		</nav>
+
+		<div class="icones">
+			<div class="fas fa-user" onclick="usuarioToggle();">
+				<div class="usuario-menu">
+					<div sec:authorize="!isAuthenticated()">
+						<a href="/cadastro">Cadastre-se</a>
+						<a href="/login">Entrar</a>
+					</div>
+					<div sec:authorize="isAuthenticated()">
+						<h3>
+							Olá usuário>
+						</h3>
+						<ul>
+							<li><a href="/pedidos/clientes">Meus pedidos</a></li>
+							<li><a href="/logout">Sair</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="fas fa-shopping-cart"></div>
+			<div class="fas fa-bars"></div>
+		</div>
+
+	</header>
+
+	<section class="home" id="home">
+
+		<div class="content">
+			<h3>Titulo</h3>
+			<p>Paragrafo</p>
+		</div>
+
+	</section>
+	<section class="sobre" id="sobre">
+
+		<h1 class="heading">Sobre Nós</h1>
+
+		<div class="row">
+
+			<div class="imagem">
+				<img src="imagens/sobre.jpg" alt="">
+			</div>
+
+			<div class="content">
+				<h3>Titulo</h3>
+				<p>paragrafo</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="produtos" id="produtos">
+
+		<h1 class="heading">Nossos Produtos</h1>
+
+  <div sec:authorize="isAuthenticated()">
+		<div class="box-container">
+  <table class="tabela-prod" id="tabela-prod">
+        <thead>
+          <tr>
+              <th>NOME</th>
+              <th>MARCA</th>
+              <th>PREÇO</th>
+              <th>QUANTIDADE</th>
+              <th></th>
+          </tr>
+        </thead>
+
+        <tbody class="info" id="info">
+          <tr>
+            <td>Arroz</td>
+            <td>São Joaquim</td>
+            <td>$6.00</td>
+            <td>20</td>
+            <!--
+            <td><a class="btn btn-primary btn-lg btn-block" th:href="@{/adicionarCarrinho/{id}(id=${produto.id})}" role="button">ADICIONAR AO CARRINHO</a></td>
+            -->
+          </tr>
+          <tr>
+            <td>Alan</td>
+            <td>Jellybean</td>
+            <td>$3.76</td>
+          </tr>
+          <tr>
+            <td>Jonathan</td>
+            <td>Lollipop</td>
+            <td>$7.00</td>
+          </tr>
+        </tbody>
+      </table>
+		<!--	
+			<div class="box">
+				<div class="imagem">
+					<img src="imagens/produto-1.png" alt="">
+				</div>
+				<div class="content">
+					<h3>Blusa</h3>
+					<p>R$20</p>
+				</div>
+			</div>
+
+
+			<div class="box">
+				<div class="imagem">
+					<img src="imagens/produto-2.png" alt="">
+				</div>
+				<div class="content">
+					<h3>Calça</h3>
+					<p>R$20</p>
+				</div>
+			</div>
+
+			<div class="box">
+				<div class="imagem">
+					<img src="imagens/produto-3.png" alt="">
+				</div>
+				<div class="content">
+					<h3>Sapatos</h3>
+					<p>R$20</p>
+				</div>
+			</div>
+-->
+		</div>
+		</div>
+
+	</section>
+
+	<section class="footer">
+
+		<div class="links">
+			<a href="#home">Inicio</a> <a href="#sobre">Sobre</a> <a
+				href="#produtos">Nossos products</a>
+		</div>
+
+	</section>
+
+	<!-- custom js file link  -->
+	<script src="js/script.js"></script>
+
+</body>
+</html>
