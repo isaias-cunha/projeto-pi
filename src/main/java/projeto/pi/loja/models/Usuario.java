@@ -31,19 +31,8 @@ public class Usuario implements UserDetails {
 	@JoinTable(name = "usuario_papel",joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"),inverseJoinColumns = @JoinColumn(name = "papel_id", referencedColumnName = "id"))
 	private Collection<Papel> roles;
 
-	public Usuario(String email, String senha, String telefone, String endereco, String nome,
-			Collection<Papel> roles) {
-		super();
-		this.email = email;
-		this.senha = senha;
-		this.telefone = telefone;
-		this.endereco = endereco;
-		this.nome = nome;
-		this.roles = roles;
-	}
-
-	public Usuario(String email2, String password, Collection<? extends GrantedAuthority> mapRolesToAuthorities) {
-
+	public Usuario(){
+		
 	}
 
 	public Long getId() {
@@ -110,7 +99,7 @@ public class Usuario implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return this.email;
+		return this.nome;
 	}
 	
 

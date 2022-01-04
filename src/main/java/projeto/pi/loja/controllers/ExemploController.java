@@ -46,4 +46,15 @@ public class ExemploController {
 		
 		return "redirect:/";
 	}
+	@PostMapping("/salvar_funcionario")
+	public String cadastrarF(Usuario user) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String password = encoder.encode(user.getSenha());
+		user.setRoles(Arrays.asList(new Papel("ROLE_FUNCIONARIO")));
+		user.setSenha(password);
+		
+		ur.save(user);
+		
+		return "redirect:/";
+	}
 }
