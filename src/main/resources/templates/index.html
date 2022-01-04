@@ -30,13 +30,12 @@
 					</div>
 					<div sec:authorize="isAuthenticated()">
 						<h3>
-							Welcome, <span sec:authentication="name">Username</span>  
+							Olá usuário>
 						</h3>
-						<ul> 
-							<li sec:authorize="hasRole('GERENTE')"><a href="/gerente">Gerenciamento</a></li>
-							<li sec:authorize="hasRole('FUNCIONARIO')"><a href="/funcionario">Encomendas</a></li>
-							<li sec:authorize="hasRole('CLIENTE')"><a href="/pedidos/clientes">Meus pedidos</a></li>
-							<li> <a href="/logout">Sair</a></li>
+						<ul>
+							<li><a href="/pedidos/clientes">Meus pedidos</a></li>
+							<li><a href="/gerente/adm">Gerenciamento</a></li>
+							<li><a href="/logout">Sair</a></li>
 						</ul>
 					</div>
 				</div>

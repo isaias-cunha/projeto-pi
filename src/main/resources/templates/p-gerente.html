@@ -2,14 +2,57 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <title>LOJA FLASH</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<h1>Página do Gerente</h1>
-	<h2>Aqui o gerente vai administrar os pedidos</h2>
 
+<div class="lay">
+	<h1>Página do Gerente</h1>
+	<h2>Cadastro e Leitura dos Produtos</h2>
+	<form action="/cadastrar_produto" method="post">
+		<div>
+			<label>Nome:</label> <input type="text" name="nome">
+		</div>
+		<div>
+			<label>Marca:</label> <input type="text" name="marca">
+		</div>
+		<div>
+			<label>Preço:</label> <input type="text" name="preco">
+		</div>
+		<div>
+			<label>Quantidade:</label> <input type="text" name="qtd">
+		</div>
+		<button class="btn" type="submit">Salvar</button>
+		<button class="btn" type="reset">Limpar</button>
 		
-		
+	</form>
 	
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>Marca</th>
+				<th>Preço</th>
+				<th>Quantidade</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="p :${produtos}">
+				<td th:text="${p.id}">1</td>
+				<td th:text="${p.nome}">1</td>
+				<td th:text="${p.marca}">1</td>
+				<td th:text="${p.preco}">1</td>
+				<td th:text="${p.qtd}">1</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
 </body>
 </html>
