@@ -1,32 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
-<title>LOJA FLASH</title>
+<title>Loja Teste</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
+
 	<header class="header">
+
 		<a href="#" class="logo"> <img src="imagens/icone.png" alt="">
 		</a>
+
 		<nav class="navbar">
-			<a href="/#home">Inicio</a> <a href="/#sobre">Sobre nós</a> <a
-				href="/#produtos">Nossos Produtos</a>
+			<a href="#home">Inicio</a> <a href="#sobre">Sobre nós</a> <a
+				href="#produtos">Nossos Produtos</a>
 		</nav>
 
-		<div class="icones" sec:authorize="isAuthenticated()">
+		<div class="icones">
 			<div class="fas fa-user" onclick="usuarioToggle();">
 				<div class="usuario-menu">
 					<div sec:authorize="!isAuthenticated()">
 						<a href="/cadastro">Cadastre-se</a> <a href="/login">Entrar</a>
 					</div>
 					<div sec:authorize="isAuthenticated()">
-						<h3>Olá usuário></h3>
+						<h3>
+							Olá, <span sec:authentication="principal.nome">nome</span> <br><br>Seus
+							dados são:
+						</h3>
+						<ul>
+							<li><span sec:authentication="principal.email">email</span></li>
+							<li><span sec:authentication="principal.telefone">telefone</span></li>
+							<li><span sec:authentication="principal.endereco">endereço</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="fas fa-bars" onclick="menuToggle();">
+				<div class="menu-menu">
+					<div sec:authorize="!isAuthenticated()">
+						<a href="/cadastro">Cadastre-se</a> <a href="/login">Entrar</a>
+					</div>
+					<div sec:authorize="isAuthenticated()">
 						<ul>
 							<li sec:authorize="hasRole('CLIENTE')"><a
-								href="/pedidos/clientes">Meus pedidos</a></li>
+								href="/pedidos">Meus pedidos</a></li>
 							<li sec:authorize="hasRole('FUNCIONARIO')"><a
 								href="/funcionario">Gerenciamento</a></li>
 							<li sec:authorize="hasRole('GERENTE')"><a
@@ -36,11 +58,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="fas fa-bars"></div>
 		</div>
-
 	</header>
-
 	<div class="lay">
 
 		<h1>Pagina de Login</h1>

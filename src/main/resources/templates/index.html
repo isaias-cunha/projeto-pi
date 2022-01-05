@@ -33,9 +33,9 @@
 							dados são:
 						</h3>
 						<ul>
-							<li>Email:<span sec:authentication="principal.email">email</span></li>
-							<li>Telefone:<span sec:authentication="principal.telefone">telefone</span></li>
-							<li>Endereço:<span sec:authentication="principal.endereco">endereço</span></li>
+							<li><span sec:authentication="principal.email">email</span></li>
+							<li><span sec:authentication="principal.telefone">telefone</span></li>
+							<li><span sec:authentication="principal.endereco">endereço</span></li>
 						</ul>
 					</div>
 				</div>
@@ -48,7 +48,7 @@
 					<div sec:authorize="isAuthenticated()">
 						<ul>
 							<li sec:authorize="hasRole('CLIENTE')"><a
-								href="/pedidos/clientes">Meus pedidos</a></li>
+								href="/pedidos">Meus pedidos</a></li>
 							<li sec:authorize="hasRole('FUNCIONARIO')"><a
 								href="/funcionario">Gerenciamento</a></li>
 							<li sec:authorize="hasRole('GERENTE')"><a
