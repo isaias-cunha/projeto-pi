@@ -1,50 +1,64 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-<!--Import Google Icon Font-->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
-<!-- Compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-	media="screen,projection">
-
-<!--Let browser know website is optimized for mobile-->
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta charset="UTF-8">
-<title>Security</title>
+<title>LOJA FLASH</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+	<header class="header">
+		<a href="#" class="logo"> <img src="imagens/icone.png" alt="">
+		</a>
+		<nav class="navbar">
+			<a href="/#home">Inicio</a> <a href="/#sobre">Sobre nós</a> <a
+				href="/#produtos">Nossos Produtos</a>
+		</nav>
 
-	<div class="container">
-
-		<h1>Faça seu login</h1>
-		<div>
-			<form action="" method="post">
-				<div class="row">
-					<div class="col-4 center">
-						<label>E-mail</label> 
-						<input type="text" name="username">
+		<div class="icones" sec:authorize="isAuthenticated()">
+			<div class="fas fa-user" onclick="usuarioToggle();">
+				<div class="usuario-menu">
+					<div sec:authorize="!isAuthenticated()">
+						<a href="/cadastro">Cadastre-se</a> <a href="/login">Entrar</a>
+					</div>
+					<div sec:authorize="isAuthenticated()">
+						<h3>Olá usuário></h3>
+						<ul>
+							<li sec:authorize="hasRole('CLIENTE')"><a
+								href="/pedidos/clientes">Meus pedidos</a></li>
+							<li sec:authorize="hasRole('FUNCIONARIO')"><a
+								href="/funcionario">Gerenciamento</a></li>
+							<li sec:authorize="hasRole('GERENTE')"><a
+								href="/gerente/adm">Gerenciamento</a></li>
+							<li><a href="/logout">Sair</a></li>
+						</ul>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-4 center">
-						<label>Senha</label> 
-						<input type="password" name="password">
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="col-4 center">
-						<button class="btn" type="submit">Enviar</button> 
-						<button class="btn" type="reset">Limpar</button>
-					</div>
-				</div>
-				
-			</form>
+			</div>
+			<div class="fas fa-bars"></div>
 		</div>
 
+	</header>
+
+	<div class="lay">
+
+		<h1>Pagina de Login</h1>
+		<form action="" method="post">
+			<div class="text">
+
+				<label>Email:</label> <input type="text" name="username" required
+							autofocus="autofocus">
+			</div>
+			<div>
+				<label>Senha:</label> <input type="password" name="password" required
+							autofocus="autofocus">
+			</div>
+			<button class="btn" type="submit">Entrar</button>
+			<button class="btn" type="reset">Limpar</button>
+		</form>
 	</div>
-	
+
+	<script src="js/script.js"></script>
 </body>
 </html>

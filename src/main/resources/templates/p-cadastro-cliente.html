@@ -1,84 +1,76 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Cliente</title>
+<title>LOJA FLASH</title>
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+	<header class="header">
+		<a href="#" class="logo"> <img src="imagens/icone.png" alt="">
+		</a>
+		<nav class="navbar">
+			<a href="/#home">Inicio</a> <a href="/#sobre">Sobre nós</a> <a
+				href="/#produtos">Nossos Produtos</a>
+		</nav>
 
-	<!-- create navigation bar ( header) -->
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#" th:href="@{/}">Loja Teste</a>
+		<div class="icones" sec:authorize="isAuthenticated()">
+			<div class="fas fa-user" onclick="usuarioToggle();">
+				<div class="usuario-menu">
+					<div sec:authorize="!isAuthenticated()">
+						<a href="/cadastro">Cadastre-se</a> <a href="/login">Entrar</a>
+					</div>
+					<div sec:authorize="isAuthenticated()">
+						<h3>Olá usuário></h3>
+						<ul>
+							<li sec:authorize="hasRole('CLIENTE')"><a
+								href="/pedidos/clientes">Meus pedidos</a></li>
+							<li sec:authorize="hasRole('FUNCIONARIO')"><a
+								href="/funcionario">Gerenciamento</a></li>
+							<li sec:authorize="hasRole('GERENTE')"><a
+								href="/gerente/adm">Gerenciamento</a></li>
+							<li><a href="/logout">Sair</a></li>
+						</ul>
+					</div>
+				</div>
 			</div>
+			<div class="fas fa-bars"></div>
 		</div>
-	</nav>
-	<br>
-	<br>
-	<br>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
+	</header>
 
-				<h1>Cadastrar Cliente</h1>
+	<div class="lay">
 
-				<form th:action="@{/salvar_cliente}" method="post">
-					<div class="form-group">
-						<label class="control-label"> Nome </label> <input type="text"
-							name="nome" class="form-control" required autofocus="autofocus" />
-					</div>
-
-					<div class="form-group">
-						<label class="control-label"> Endereço: </label> <input
-							type="text" name="endereco" class="form-control" required
-							autofocus="autofocus" />
-					</div>
-					
-					<div class="form-group">
-						<label class="control-label"> Telefone: </label> <input
-							type="text" name="telefone" class="form-control" required
-							autofocus="autofocus" />
-					</div>
-
-					<div class="form-group">
-						<label class="control-label"> Email: </label> <input type="text"
-							name="email" class="form-control" required autofocus="autofocus" />
-					</div>
-
-					<div class="form-group">
-						<label class="control-label"> Senha: </label> <input
-							type="password" name="senha" class="form-control" required
-							autofocus="autofocus" />
-					</div>
-
-					<div class="form-group">
-						
-						<div class="row">
-							<div class="col-4 center">
-								<button class="btn" type="submit">Enviar</button>
-								<button class="btn" type="reset">Limpar</button>
-							</div>
-						</div>
-						<br> 
-						<span>Já é cadastrado? <a href="/">Logar</a></span>
-					</div>
-				</form>
-
+		<h1>Cadastrar Cliente</h1>
+		<form action="/salvar_cliente" method="post">
+			<div class="text">
+				<label>Nome:</label> <input type="text" name="nome" required
+							autofocus="autofocus">
 			</div>
-		</div>
+			<div>
+				<label>Telefone:</label> <input type="text" name="telefone" required
+							autofocus="autofocus">
+			</div>
+			<div>
+				<label>Endereço:</label> <input type="text" name="endereco" required
+							autofocus="autofocus">
+			</div>
+			<div>
+				<label>Email:</label> <input type="text" name="email" required
+							autofocus="autofocus">
+			</div>
+			<div>
+				<label>Senha:</label> <input type="password" name="senha" required
+							autofocus="autofocus">
+			</div>
+			<button class="btn" type="submit">Salvar</button>
+			<button class="btn" type="reset">Limpar</button>
+			<br> <span>Já é cadastrado? <a href="/login">Logar</a></span>
+		</form>
 	</div>
+
+	<script src="js/script.js"></script>
 </body>
 </html>

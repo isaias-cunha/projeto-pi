@@ -2,58 +2,118 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- Compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <title>LOJA FLASH</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+	<header class="header">
 
-<div class="lay">
-	<h1>Página do Gerente</h1>
-	<h2>Cadastro e Leitura dos Produtos</h2>
-	<form action="/cadastrar_produto" method="post">
-		<div class="text">
-			<label>Nome:</label> <input type="text" name="nome">
+		<a href="#" class="logo"> <img src="imagens/icone.png" alt="">
+		</a>
+
+		<nav class="navbar">
+			<a href="/#home">Inicio</a> <a href="/#sobre">Sobre nós</a> <a
+				href="/#produtos">Nossos Produtos</a>
+		</nav>
+
+		<div class="icones">
+			<div class="fas fa-user" onclick="usuarioToggle();">
+				<div class="usuario-menu">
+					<div sec:authorize="!isAuthenticated()">
+						<a href="/cadastro">Cadastre-se</a> <a href="/login">Entrar</a>
+					</div>
+					<div sec:authorize="isAuthenticated()">
+						<h3>Olá usuário></h3>
+						<ul>
+							<li sec:authorize="hasRole('CLIENTE')"><a
+								href="/pedidos/clientes">Meus pedidos</a></li>
+							<li sec:authorize="hasRole('FUNCIONARIO')"><a
+								href="/funcionario">Gerenciamento</a></li>
+							<li sec:authorize="hasRole('GERENTE')"><a
+								href="/gerente/adm">Gerenciamento</a></li>
+							<li><a href="/logout">Sair</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="fas fa-bars"></div>
 		</div>
-		<div>
-			<label>Marca:</label> <input type="text" name="marca">
-		</div>
-		<div>
-			<label>Preço:</label> <input type="text" name="preco">
-		</div>
-		<div>
-			<label>Quantidade:</label> <input type="text" name="qtd">
-		</div>
-		<button class="btn" type="submit">Salvar</button>
-		<button class="btn" type="reset">Limpar</button>
-		
-	</form>
-	
-	<table>
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Nome</th>
-				<th>Marca</th>
-				<th>Preço</th>
-				<th>Quantidade</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="p :${produtos}">
-				<td th:text="${p.id}">1</td>
-				<td th:text="${p.nome}">1</td>
-				<td th:text="${p.marca}">1</td>
-				<td th:text="${p.preco}">1</td>
-				<td th:text="${p.qtd}">1</td>
-				<td><a th:href="@{/gerente/{id}/remover(id=${p.id})}">Apagar</a></button></td>
-			</tr>
-		</tbody>
-	</table>
-</div>
+
+	</header>
+
+	<div class="lay">
+		<h1>Página do Gerente</h1>
+		<br> <br> <br>
+		<h2>Cadastro de Produtos</h2>
+		<form action="/cadastrar_produto" method="post" class="produ">
+			<div class="text">
+				<label>Nome:</label> <input type="text" name="nome">
+			</div>
+			<div>
+				<label>Marca:</label> <input type="text" name="marca">
+			</div>
+			<div>
+				<label>Preço:</label> <input type="pqn" name="preco">
+			</div>
+			<div>
+				<label>Quantidade:</label> <input type="pqn" name="qtd">
+			</div>
+			<button class="btn" type="submit">Salvar</button>
+			<button class="btn" type="reset">Limpar</button>
+
+		</form>
+		<br>
+		<h1>Tabela de Produtos</h1>
+		<br>
+		<table>
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nome</th>
+					<th>Marca</th>
+					<th>Preço</th>
+					<th>Quantidade</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="p :${produtos}">
+					<td th:text="${p.id}">1</td>
+					<td th:text="${p.nome}">1</td>
+					<td th:text="${p.marca}">1</td>
+					<td th:text="${p.preco}">1</td>
+					<td th:text="${p.qtd}">1</td>
+					<td><a th:href="@{/gerente/{id}/editar(id=${p.id})}">Editar</a>
+						</button></td>
+					<td><a th:href="@{/gerente/{id}/remover(id=${p.id})}">Apagar</a>
+						</button></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<h2>Cadastro de Funcionarios</h2>
+		<form action="/salvar_funcionario" method="post">
+			<div class="text">
+				<label>Nome:</label> <input type="text" name="nome">
+			</div>
+			<div>
+				<label>Telefone:</label> <input type="text" name="telefone">
+			</div>
+			<div>
+				<label>Endereço:</label> <input type="text" name="endereco">
+			</div>
+			<div>
+				<label>Email:</label> <input type="text" name="email" required
+							autofocus="autofocus">
+			</div>
+			<div>
+				<label>Senha:</label> <input type="password" name="senha">
+			</div>
+			<button class="btn" type="submit">Salvar</button>
+			<button class="btn" type="reset">Limpar</button>
+		</form>
+		<script src="js/script.js"></script>
+	</div>
 </body>
 </html>

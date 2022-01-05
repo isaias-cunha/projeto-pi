@@ -25,25 +25,40 @@
 			<div class="fas fa-user" onclick="usuarioToggle();">
 				<div class="usuario-menu">
 					<div sec:authorize="!isAuthenticated()">
-						<a href="/cadastro">Cadastre-se</a>
-						<a href="/login">Entrar</a>
+						<a href="/cadastro">Cadastre-se</a> <a href="/login">Entrar</a>
 					</div>
 					<div sec:authorize="isAuthenticated()">
 						<h3>
-							Olá usuário>
+							Olá, <span sec:authentication="principal.nome">nome</span> <br><br>Seus
+							dados são:
 						</h3>
 						<ul>
-							<li sec:authorize="hasRole('CLIENTE')"><a href="/pedidos/clientes">Meus pedidos</a></li>
-							<li sec:authorize="hasRole('GERENTE')"><a href="/gerente/adm">Gerenciamento</a></li>
+							<li>Email:<span sec:authentication="principal.email">email</span></li>
+							<li>Telefone:<span sec:authentication="principal.telefone">telefone</span></li>
+							<li>Endereço:<span sec:authentication="principal.endereco">endereço</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="fas fa-bars" onclick="menuToggle();">
+				<div class="menu-menu">
+					<div sec:authorize="!isAuthenticated()">
+						<a href="/cadastro">Cadastre-se</a> <a href="/login">Entrar</a>
+					</div>
+					<div sec:authorize="isAuthenticated()">
+						<ul>
+							<li sec:authorize="hasRole('CLIENTE')"><a
+								href="/pedidos/clientes">Meus pedidos</a></li>
+							<li sec:authorize="hasRole('FUNCIONARIO')"><a
+								href="/funcionario">Gerenciamento</a></li>
+							<li sec:authorize="hasRole('GERENTE')"><a
+								href="/gerente/adm">Gerenciamento</a></li>
 							<li><a href="/logout">Sair</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
-			<div class="fas fa-shopping-cart"></div>
-			<div class="fas fa-bars"></div>
 		</div>
-
 	</header>
 
 	<section class="home" id="home">
@@ -74,32 +89,31 @@
 	<section class="produtos" id="produtos">
 
 		<h1 class="heading">Nossos Produtos</h1>
-		
-		<div sec:authorize="hasRole('CLIENTE')">
 		<div class="box-container">
-		
-		<table class="tabela-prod" id="tabela-prod">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Nome</th>
-				<th>Marca</th>
-				<th>Preço</th>
-				<th>Quantidade</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="p :${produtos}">
-				<td th:text="${p.id}">1</td>
-				<td th:text="${p.nome}">1</td>
-				<td th:text="${p.marca}">1</td>
-				<td th:text="${p.preco}">1</td>
-				<td th:text="${p.qtd}">1</td>
-				<td><button class="car">ADICIONAR AO CARRINHO</button></td>
-			</tr>
-		</tbody>
-	</table>
 
+			<table class="tabela-prod" id="tabela-prod">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Nome</th>
+						<th>Marca</th>
+						<th>Preço</th>
+						<th>Quantidade</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="p :${produtos}">
+						<td th:text="${p.id}">1</td>
+						<td th:text="${p.nome}">1</td>
+						<td th:text="${p.marca}">1</td>
+						<td th:text="${p.preco}">1</td>
+						<td th:text="${p.qtd}">1</td>
+						<td><button class="car">ADICIONAR AO CARRINHO</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
 	<section class="footer">
 
 		<div class="links">
@@ -108,9 +122,6 @@
 		</div>
 
 	</section>
-
-	<!-- custom js file link  -->
 	<script src="js/script.js"></script>
-
 </body>
 </html>

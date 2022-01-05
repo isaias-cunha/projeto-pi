@@ -17,11 +17,13 @@ import projeto.pi.loja.models.Produto;
 import projeto.pi.loja.models.Usuario;
 import projeto.pi.loja.repositories.ProdutoRepository;
 import projeto.pi.loja.repositories.UsuarioRepository;
+import projeto.pi.loja.service.CustomDetailsService;
 @Controller
 @RequestMapping("/")
 public class IndexController {
 	@Autowired
 	private ProdutoRepository pr;
+	private CustomDetailsService sv;
 	
 	@GetMapping("/inicio")
 	public String index() {
@@ -35,4 +37,5 @@ public class IndexController {
 	mv.addObject("produtos", produtos);
 	return mv;
 	}
+	
 }
