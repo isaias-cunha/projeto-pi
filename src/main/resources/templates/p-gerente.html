@@ -16,7 +16,7 @@
 	<h1>Página do Gerente</h1>
 	<h2>Cadastro e Leitura dos Produtos</h2>
 	<form action="/cadastrar_produto" method="post">
-		<div>
+		<div class="text">
 			<label>Nome:</label> <input type="text" name="nome">
 		</div>
 		<div>
@@ -50,6 +50,7 @@
 				<td th:text="${p.marca}">1</td>
 				<td th:text="${p.preco}">1</td>
 				<td th:text="${p.qtd}">1</td>
+				<td><a th:href="@{/gerente/{id}/remover(id=${p.id})}">Apagar</a></button></td>
 			</tr>
 		</tbody>
 	</table>

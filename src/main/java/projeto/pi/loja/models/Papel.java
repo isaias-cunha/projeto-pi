@@ -17,6 +17,10 @@ public class Papel implements GrantedAuthority {
 	private Long id;
 	private String nome;
 
+	private Papel() {
+		
+	}
+	
 	public Papel(String papel) {
 		this.nome = papel;
 	}

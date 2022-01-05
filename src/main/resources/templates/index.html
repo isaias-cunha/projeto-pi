@@ -33,8 +33,8 @@
 							Olá usuário>
 						</h3>
 						<ul>
-							<li><a href="/pedidos/clientes">Meus pedidos</a></li>
-							<li><a href="/gerente/adm">Gerenciamento</a></li>
+							<li sec:authorize="hasRole('CLIENTE')"><a href="/pedidos/clientes">Meus pedidos</a></li>
+							<li sec:authorize="hasRole('GERENTE')"><a href="/gerente/adm">Gerenciamento</a></li>
 							<li><a href="/logout">Sair</a></li>
 						</ul>
 					</div>
@@ -74,48 +74,37 @@
 	<section class="produtos" id="produtos">
 
 		<h1 class="heading">Nossos Produtos</h1>
-
+		
+		<div sec:authorize="hasRole('CLIENTE')">
 		<div class="box-container">
-
-			<div class="box">
-				<div class="imagem">
-					<img src="imagens/produto-1.png" alt="">
-				</div>
-				<div class="content">
-					<h3>Blusa</h3>
-					<p>R$20</p>
-				</div>
-			</div>
-
-			<div class="box">
-				<div class="imagem">
-					<img src="imagens/produto-2.png" alt="">
-				</div>
-				<div class="content">
-					<h3>Calça</h3>
-					<p>R$20</p>
-				</div>
-			</div>
-
-			<div class="box">
-				<div class="imagem">
-					<img src="imagens/produto-3.png" alt="">
-				</div>
-				<div class="content">
-					<h3>Sapatos</h3>
-					<p>R$20</p>
-				</div>
-			</div>
-
-		</div>
-
-	</section>
+		
+		<table class="tabela-prod" id="tabela-prod">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>Marca</th>
+				<th>Preço</th>
+				<th>Quantidade</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="p :${produtos}">
+				<td th:text="${p.id}">1</td>
+				<td th:text="${p.nome}">1</td>
+				<td th:text="${p.marca}">1</td>
+				<td th:text="${p.preco}">1</td>
+				<td th:text="${p.qtd}">1</td>
+				<td><button class="car">ADICIONAR AO CARRINHO</button></td>
+			</tr>
+		</tbody>
+	</table>
 
 	<section class="footer">
 
 		<div class="links">
 			<a href="#home">Inicio</a> <a href="#sobre">Sobre</a> <a
-				href="#produtos">Nossos products</a>
+				href="#produtos">Nossos produtos</a>
 		</div>
 
 	</section>

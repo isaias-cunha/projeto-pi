@@ -318,6 +318,14 @@ section{
 	text-align: center;
 }
 
-table{
-	text
+.text{
+	color: white;
 }
+
+.car{
+	padding:.7rem 2rem;
+    color:var(--main-color);
+    border:var(--border);
+    font-size: 2rem;
+}
+
