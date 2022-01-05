@@ -32,7 +32,7 @@ public class GerenteController {
 	mv.addObject("produtos", produtos);
 	return mv;
 	}
-	@GetMapping("/gerente/{id}/remover")
+	@GetMapping("/{id}/remover")
 	public String apagarEvento(@PathVariable Long id, RedirectAttributes attributes) {
 
 		Optional<Produto> opt = pr.findById(id);
